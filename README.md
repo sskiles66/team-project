@@ -6,6 +6,9 @@ Use this as a starting point to complete the WDD 330 team activity: the SleepOut
 
 https://glowing-biscochitos-f2c5e3.netlify.app/
 
+https://discord.gg/DJzXFVn9
+
+
 
 ## Prerequisites
 
