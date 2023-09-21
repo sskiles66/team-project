@@ -2,7 +2,7 @@ import { setLocalStorage } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
 
 function addProductToCart(product) {
-  setLocalStorage("so-cart", product);
+  setLocalStorage(product.NameWithoutBrand, product);
 }
 // add to cart button event handler
 async function addToCartHandler(e) {
