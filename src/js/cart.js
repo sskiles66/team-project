@@ -1,11 +1,14 @@
 import { getLocalStorage } from "./utils.mjs";
 
 /*
-todo: Loop through each key in localStorage
-todo: localStorage should get the value from the key
 todo: Somehow get it to work and show up in cart page
  */
 function renderCartContents() {
+for (let i = 0; i < localStorage.length; i++) {
+  let key = localStorage.key(i)
+  console.log(key, localStorage.getItem(key))
+}
+
   const cartItems = getLocalStorage("so-cart");
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
