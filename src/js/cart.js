@@ -1,17 +1,20 @@
 import { getLocalStorage } from "./utils.mjs";
 
 /*
-todo: Somehow get it to work and show up in cart page
+fixme: Image not found for 'Talus Tent - 3-Person, 3-Season'
+fixme: 'GET http://localhost:5173/images/tents/the-north-face-talus-tent-3-person-3-season-in-golden-oak-saffron-yellow~p~989cg_01~320.jpg 404 (Not Found)'
  */
 function renderCartContents() {
-for (let i = 0; i < localStorage.length; i++) {
-  let key = localStorage.key(i)
-  console.log(key, localStorage.getItem(key))
-}
-
-  const cartItems = getLocalStorage("so-cart");
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  let cartItems = [];
+  let htmlItems = [];
+  let allHtmlItems = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    cartItems = getLocalStorage(key);
+    htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    allHtmlItems.push(htmlItems);
+  }
+  document.querySelector(".product-list").innerHTML = allHtmlItems.join("");
 }
 
 function cartItemTemplate(item) {
