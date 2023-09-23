@@ -1,9 +1,5 @@
 import { getLocalStorage } from "./utils.mjs";
 
-/*
-fixme: Image not found for 'Talus Tent - 3-Person, 3-Season'
-fixme: 'GET http://localhost:5173/images/tents/the-north-face-talus-tent-3-person-3-season-in-golden-oak-saffron-yellow~p~989cg_01~320.jpg 404 (Not Found)'
- */
 function renderCartContents() {
   let cartItems = [];
   let htmlItems = [];
