@@ -1,9 +1,5 @@
 import { getLocalStorage } from "./utils.mjs";
 
-/*
-TODO: Abraham Jimenez -  The Talus Tent title is different on the home page and the cart page
- */
-
 function renderCartContents() {
   let cartItems = [];
   let allHtmlItems = [];
