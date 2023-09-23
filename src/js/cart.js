@@ -2,20 +2,32 @@ import { getLocalStorage } from "./utils.mjs";
 
 /*
 TODO: Abraham Jimenez -  The Talus Tent title is different on the home page and the cart page
-TODO: Abraham Jimenez -  When multiple of the same tents are on the cart page, they become separated by commas
  */
 
 function renderCartContents() {
   let cartItems = [];
   let htmlItems = [];
   let allHtmlItems = [];
+  let newList = [];
   for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i);
     cartItems = getLocalStorage(key);
-    htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    allHtmlItems.push(htmlItems);
+
+    for (let j = 0; j < cartItems.length; j++) {
+      let items = cartItems[j];
+      // console.log(items);
+      newList.push(items);
+    }
   }
-  document.querySelector(".product-list").innerHTML = allHtmlItems.join("");
+
+  htmlItems = newList.map((item) => cartItemTemplate(item));
+  allHtmlItems.push(htmlItems);
+
+  const stringWithoutCommas = allHtmlItems.join("").replace(/,/g, "");
+  let noCommasList = [];
+  noCommasList.push(stringWithoutCommas);
+
+  document.querySelector(".product-list").innerHTML = noCommasList.join("");
 }
 
 function cartItemTemplate(item) {
