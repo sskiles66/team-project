@@ -6,7 +6,6 @@ TODO: Abraham Jimenez -  The Talus Tent title is different on the home page and 
 
 function renderCartContents() {
   let cartItems = [];
-  let htmlItems = [];
   let allHtmlItems = [];
   let newList = [];
   for (let i = 0; i < localStorage.length; i++) {
@@ -20,7 +19,7 @@ function renderCartContents() {
     }
   }
 
-  htmlItems = newList.map((item) => cartItemTemplate(item));
+  let htmlItems = newList.map((item) => cartItemTemplate(item));
   allHtmlItems.push(htmlItems);
 
   const stringWithoutCommas = allHtmlItems.join("").replace(/,/g, "");
@@ -31,7 +30,7 @@ function renderCartContents() {
 }
 
 function cartItemTemplate(item) {
-  const newItem = `<li class="cart-card divider">
+  return `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
       src="${item.Image}"
@@ -45,8 +44,6 @@ function cartItemTemplate(item) {
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
-
-  return newItem;
 }
 
 renderCartContents();
