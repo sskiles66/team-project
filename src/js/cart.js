@@ -1,5 +1,10 @@
 import { getLocalStorage } from "./utils.mjs";
 
+/*
+TODO: Abraham Jimenez -  The Talus Tent title is different on the home page and the cart page
+TODO: Abraham Jimenez -  When multiple of the same tents are on the cart page, they become separated by commas
+ */
+
 function renderCartContents() {
   let cartItems = [];
   let htmlItems = [];
