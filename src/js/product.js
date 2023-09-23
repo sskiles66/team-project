@@ -1,10 +1,10 @@
 import { setLocalStorage } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
 
-const productList = []
+const productList = [];
 
 function addProductToCart(product) {
-  productList.push(product)
+  productList.push(product);
   setLocalStorage(product.NameWithoutBrand, productList);
 }
 // add to cart button event handler
