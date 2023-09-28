@@ -1,11 +1,26 @@
 import { getLocalStorage } from "./utils.mjs";
 
+const totalSel = document.querySelector("#total");
+
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
   if (cartItems !== null) {
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
+    totalSel.classList.remove("hide");
+    const total = getTotalCost();
+    document.querySelector("#total-amount").innerHTML = "$" + total;
   }
+}
+
+function getTotalCost() {
+  let total = 0;
+  const cartItems = getLocalStorage("so-cart");
+  cartItems.forEach((element) => {
+    total += element.ListPrice;
+  });
+
+  return total;
 }
 
 function cartItemTemplate(item) {
