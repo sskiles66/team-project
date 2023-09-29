@@ -45,12 +45,10 @@ export default async function productDetails(productId, selector) {
 
   // This function will animate the cart when the user clicks on the Add to Cart button
   function animateCart() {
-    document.getElementById("addToCart").addEventListener("click", () => {
-      document.querySelector(".cart").classList.add("cart-animate");
-      setTimeout(() => {
-        document.querySelector(".cart").classList.remove("cart-animate");
-      }, 100);
-    });
+    document.querySelector(".cart").classList.add("cart-animate");
+    setTimeout(() => {
+      document.querySelector(".cart").classList.remove("cart-animate");
+    }, 100);
   }
 
   // once the HTML is rendered we can add a listener to Add to Cart button and animate the cart
