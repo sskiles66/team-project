@@ -6,9 +6,23 @@ const cartItems = JSON.parse(cartData);
 const cartIcon = document.querySelector(".cart");
 
 function createSuperscript() {
+  // Creates a superscript when there are no items in cart
+  cartIcon.insertAdjacentHTML("beforeend", `<sup class="cart__superscript__none">${0}</sup>`);
+  const superscriptNone = document.querySelector(".cart__superscript__none");
+  // Style the superscript
+  superscriptNone.style.position = "absolute";
+  superscriptNone.style.top = "4px";
+  superscriptNone.style.right = "-8px";
+  superscriptNone.style.backgroundColor = "red";
+  superscriptNone.style.borderRadius = "50%";
+  superscriptNone.style.width = "16px";
+  superscriptNone.style.height = "16px";
+
   // This checks if there is data in localStorage
   // This also removes error message in console
   if (cartData !== null) {
+    // Removes the superscript when items are added to cart
+    superscriptNone.style.display = "none";
     cartIcon.insertAdjacentHTML("beforeend", `<sup class="cart__superscript">${cartItems.length}</sup>`);
     // Reference the superscript
     const superscript = document.querySelector(".cart__superscript");
@@ -19,6 +33,7 @@ function createSuperscript() {
     superscript.style.backgroundColor = "red";
     superscript.style.borderRadius = "50%";
     superscript.style.padding = "1.3px";
+
     // Styles superscript when there are less than 9 items in cart
     if (cartItems.length < 9) {
       superscript.style.padding = "0";
