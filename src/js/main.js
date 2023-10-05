@@ -6,4 +6,4 @@ new ProductList({
   props: { category: "tents" },
 });
 
-displaySuperscript()
+displaySuperscript();
