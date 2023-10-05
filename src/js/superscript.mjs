@@ -47,7 +47,6 @@ function styleCart() {
   cartIcon.style.position = "relative";
 }
 
-// todo: Fix add to cart on empty cart
 function updateCartSuperscript() {
 // Check for button click
 // This checks if the DOM is loaded and will run code after it is loaded
@@ -81,8 +80,11 @@ function updateCartSuperscript() {
   observer.observe(document.documentElement, { childList: true, subtree: true });
 }
 
-export default function displaySuperscript() {
+function displaySuperscript() {
   createSuperscript();
   styleCart();
   updateCartSuperscript();
 }
+
+// Runs code in file
+displaySuperscript()
