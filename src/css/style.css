@@ -19,7 +19,8 @@
 }
 
 /* Prevents horizontal scroll when scale animations are triggered */
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 
@@ -238,7 +239,7 @@ button {
 /* Animate the cart icon when clicking Add to Cart button */
 .cart-animate {
   transform: scale(1.5);
-  transition: transform .18s ease-in-out;
+  transition: transform 0.18s ease-in-out;
 }
 
 @media screen and (min-width: 500px) {
