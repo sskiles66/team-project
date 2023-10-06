@@ -41,6 +41,9 @@ function createSuperscript() {
       superscript.style.height = "16px";
     }
   }
+  superscript.style.backgroundColor = "#EB7E75";
+  superscript.style.width = "18px";
+  superscript.style.height = "18px";
 }
 
 function styleCart() {
