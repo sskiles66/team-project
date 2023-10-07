@@ -1,12 +1,8 @@
 <script>
   import {getData} from "../productData.mjs";
+  import DiscountedPrice from "./DiscountedPrice.svelte";
 
-  export let discountPercent = 10
-
-  export function calculateDiscount(originalPrice, discountPercent) {
-    const discountPrice = originalPrice - (originalPrice * (discountPercent / 100))
-    return discountPrice.toFixed(2)
-  }
+  const discount = 12;
 
   // this is how we make a prop in svelte
   export let category;
@@ -24,7 +20,6 @@
 
 <p>Top products: {category}</p>
 
-
 {#await filteredPromise}
   <p>...waiting</p>
 {:then data}
@@ -39,7 +34,8 @@
           />
           <h3 class="card__brand">{product.Brand.Name}</h3>
           <h2 class="card__name">{product.Name}</h2>
-          <p class="product-card__price"><s>{product.ListPrice}</s> {calculateDiscount(product.ListPrice, discountPercent)}</p>
+          <s class="product-card__price">{product.ListPrice}</s>
+          <DiscountedPrice finalPrice={product.FinalPrice} discountPercentage={discount}/>
         </a>
       </li>
     {/each}
