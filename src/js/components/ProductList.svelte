@@ -2,8 +2,6 @@
   import {getData} from "../productData.mjs";
   import DiscountedPrice from "./DiscountedPrice.svelte";
 
-  const discount = 12;
-
   // this is how we make a prop in svelte
   export let category;
   // if you are looking at this thinking that's strange to just stop with a promise
@@ -35,7 +33,7 @@
           <h3 class="card__brand">{product.Brand.Name}</h3>
           <h2 class="card__name">{product.Name}</h2>
           <s class="product-card__price">{product.ListPrice}</s>
-          <DiscountedPrice finalPrice={product.FinalPrice} discountPercentage={discount}/>
+          <DiscountedPrice finalPrice={product.FinalPrice}/>
         </a>
       </li>
     {/each}
