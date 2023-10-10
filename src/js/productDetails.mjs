@@ -1,5 +1,6 @@
 import {getLocalStorage, setLocalStorage} from "./utils.mjs";
 import {findProductById} from "./productData.mjs";
+import {calculateDiscount} from "./calculateDiscount.mjs";
 
 let product = {};
 
@@ -11,7 +12,8 @@ function productDetailsTemplate(product) {
       src="${product.Image}"
       alt="${product.Name}"
     />
-    <p class="product-card__price">$${product.FinalPrice}</p>
+    <s class="product-card__price">$${product.FinalPrice}</s>
+    <p>$${calculateDiscount(product.FinalPrice)}</p>
     <p class="product__color">${product.Colors[0].ColorName}</p>
     <p class="product__description">
     ${product.DescriptionHtmlSimple}
