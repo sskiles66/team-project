@@ -11,7 +11,7 @@ function renderCartContents() {
     totalSel.classList.remove("hide");
     const total = getTotalCost();
     document.querySelector("#total-amount").innerHTML = "$" + total;
-    makeListeners();
+    setListeners();
   }
 }
 
@@ -25,7 +25,7 @@ function getTotalCost() {
   return total;
 }
 
-function makeListeners(){
+function setListeners(){
   const cartItems = getLocalStorage("so-cart");
   cartItems.forEach((item) => {
     const deleteButton = document.getElementById(item.Id)
@@ -46,10 +46,6 @@ function removeItem(itemId){
   cartItems.splice(cartItems.indexOf(itemId), 1);
   setLocalStorage("so-cart", cartItems);
   renderCartContents();
-}
-
-async function removeItemHandler(product) {
-  removeItem(product);
 }
 
 function cartItemTemplate(item) {
