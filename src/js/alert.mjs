@@ -1,5 +1,5 @@
 async function getAlerts() {
-    const response = await fetch('../public/json/alert.json');
+    const response = await fetch('/json/alert.json');
     const data = await response.json();
     if (data != null){
       const section = document.createElement('section');
