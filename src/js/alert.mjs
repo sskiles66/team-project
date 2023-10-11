@@ -11,7 +11,7 @@ async function getAlerts() {
         el.style.color = element.color;
         section.appendChild(el);
       });
-      document.querySelector(".divider").prepend(section);
+      document.querySelector("main").prepend(section);
  }
 }
 
