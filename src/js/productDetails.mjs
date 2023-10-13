@@ -1,7 +1,7 @@
 import {getLocalStorage, setLocalStorage} from "./utils.mjs";
 import {findProductById} from "./productData.mjs";
 import {calculateDiscount} from "./calculateDiscount.mjs";
-// import { cartCount } from "./stores.mjs";
+import { cartCount } from "./stores.mjs";
 
 let product = {};
 
@@ -56,13 +56,13 @@ function addProductToCart(product) {
     let list = getLocalStorage("so-cart");
     list.push(product);
     setLocalStorage("so-cart", list);
-    //cartCount.set(cartCount + 1);
+    cartCount.set(list.length);
 
   } else {
     let list = [];
     list.push(product);
     setLocalStorage("so-cart", list);
-    //cartCount.set(cartCount + 1);
+    cartCount.set(list.length);
   }
 }
 

@@ -1,4 +1,4 @@
 import { writable } from "svelte/store";
-import { getCartAmount} from "./utils.mjs";
+import { getCartAmount } from "./utils.mjs";
 
-export const cartCount = writable(getCartAmount());
+export const cartCount = writable(getCartAmount())

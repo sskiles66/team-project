@@ -26,7 +26,7 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
-export function GetCartAmount(){
+export function getCartAmount(){
   const cart = getLocalStorage("so-cart");
   return cart.length;
 }
@@ -34,7 +34,7 @@ export function GetCartAmount(){
 export function renderHeaderFooter(){
   new MainHeader({
     target: document.querySelector("#main-header"),
-    props: {cartCount: GetCartAmount()}
+    props: {cartCount: getCartAmount()}
 }),
   new MainFooter({
   target: document.querySelector("#main-footer")
