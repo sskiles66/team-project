@@ -26,24 +26,31 @@ function getTotalCost() {
 }
 
 function setListeners(){
+  let index = 0
   const cartItems = getLocalStorage("so-cart");
   cartItems.forEach((item) => {
-    const deleteButton = document.getElementById(item.Id)
+    const deleteButton = document.getElementById(item.Id);
     deleteButton.addEventListener('click', () => {
-      const id = item.Id;
-      removeItem(id);
-    })
+      const cartItem = item;
+      removeItem(cartItem);
+      })
+//   cartItems.forEach((item) => {
+//     const deleteButton = document.querySelector(`#${item.Id}`);
+//     deleteButton.addEventListener('click', () => {
+//       const cartItem = item;
+//       removeItem(cartItem);
+//     })
+//   })
   })
-
-  // let deleteButton = document.querySelectorAll(".delete-button");
-  // deleteButton.forEach((item) =>{
-  //   item.addEventListener('click', removeItem);
-  // })
 }
 
-function removeItem(itemId){
+function removeItem(item){
   const cartItems = getLocalStorage("so-cart");
-  cartItems.splice(cartItems.indexOf(itemId), 1);
+  const deleteItem = cartItems.findIndex(function(object){
+    return object.Id === item.Id;
+  });
+
+  cartItems.splice(deleteItem, 1);
   setLocalStorage("so-cart", cartItems);
   renderCartContents();
 }
