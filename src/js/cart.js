@@ -1,6 +1,6 @@
-import { getLocalStorage,setLocalStorage } from "./utils.mjs";
-import {findProductById} from "./productData.mjs";
-import {calculateDiscount} from "./calculateDiscount.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { findProductById } from "./productData.mjs";
+import { calculateDiscount } from "./calculateDiscount.mjs";
 
 const totalSel = document.querySelector("#total");
 
@@ -20,7 +20,7 @@ function renderCartContents() {
     cartItems.forEach((item) => {
       let existingItem = products.find((product) => product.Id === item.Id);
       if (existingItem) {
-        existingItem.quantity++;
+        existingItem.quantity = cartItems.length;
       } else {
         item.quantity = 1;
         products.push(item);
@@ -56,28 +56,29 @@ function getTotalCost() {
   return total;
 }
 
-function setListeners(){
-  let index = 0
+function setListeners() {
+  let index = 0;
   const cartItems = getLocalStorage("so-cart");
   cartItems.forEach((item) => {
     const deleteButton = document.getElementById(item.Id);
+    console.log(item.Id);
     deleteButton.addEventListener("click", () => {
       const cartItem = item;
       removeItem(cartItem);
-      })
-//   cartItems.forEach((item) => {
-//     const deleteButton = document.querySelector(`#${item.Id}`);
-//     deleteButton.addEventListener('click', () => {
-//       const cartItem = item;
-//       removeItem(cartItem);
-//     })
-//   })
-  })
+    });
+    //   cartItems.forEach((item) => {
+    //     const deleteButton = document.querySelector(`#${item.Id}`);
+    //     deleteButton.addEventListener('click', () => {
+    //       const cartItem = item;
+    //       removeItem(cartItem);
+    //     })
+    //   })
+  });
 }
 
-function removeItem(item){
+function removeItem(item) {
   const cartItems = getLocalStorage("so-cart");
-  const deleteItem = cartItems.findIndex(function(object){
+  const deleteItem = cartItems.findIndex(function (object) {
     return object.Id === item.Id;
   });
 
@@ -87,7 +88,9 @@ function removeItem(item){
 }
 
 function cartItemTemplate(item) {
+  console.log(item.quantity);
   return `<li class="cart-card divider">
+<snan id="${item.Id}">X</snan>
   <a href="#" class="cart-card__image">
     <img
       src="${item.Image}"
@@ -98,7 +101,6 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
   <div>
     <s class="cart-card__price">$${item.FinalPrice}</s>
     <p>$${calculateDiscount(item.FinalPrice)}</p>
