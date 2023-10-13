@@ -8,5 +8,3 @@ renderHeaderFooter();
 const productId = getParam("product");
 
 productDetails(productId, ".product-detail");
-
-
