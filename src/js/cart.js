@@ -53,7 +53,7 @@ function setListeners(){
   const cartItems = getLocalStorage("so-cart");
   cartItems.forEach((item) => {
     const deleteButton = document.getElementById(item.Id);
-    deleteButton.addEventListener('click', () => {
+    deleteButton.addEventListener("click", () => {
       const cartItem = item;
       removeItem(cartItem);
       })
