@@ -2,6 +2,7 @@ import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
 import { calculateDiscount } from "./calculateDiscount.mjs";
 import { renderHeaderFooter } from "./utils.mjs";
+import { cartCount } from "./stores.mjs";
 
 const totalSel = document.querySelector("#total");
 
@@ -11,6 +12,7 @@ renderHeaderFooter();
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
+  cartCount.set(cartItems.length);
   if (cartItems !== null) {
     // cartItems.forEach((item) => {
     //   if (!products.some(item)){
@@ -20,7 +22,15 @@ function renderCartContents() {
     // })
     //products = cartItems;
 
+
+
+
+
+
     cartItems.forEach((item) => {
+      if (item.quantity == 0){
+        console.log("gogone");
+      }
       let existingItem = products.find((product) => product.Id === item.Id);
       if (existingItem) {
         existingItem.quantity = cartItems.length;
@@ -30,15 +40,19 @@ function renderCartContents() {
       }
     });
 
+
+
+
+
     console.log(cartItems);
     console.log(products);
 
-    const htmlItems = products.map((item) => cartItemTemplate(item));
+    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
     totalSel.classList.remove("hide");
     const total = getTotalCost();
     document.querySelector("#total-amount").innerHTML = "$" + total;
-    setListeners();
+    //setListeners();
   }
 }
 
@@ -60,14 +74,18 @@ function getTotalCost() {
 }
 
 function setListeners() {
-  let index = 0;
+  let index = -1;
   const cartItems = getLocalStorage("so-cart");
   cartItems.forEach((item) => {
+    index += 1
+    item.index = index
+    //console.log(item.index)
     const deleteButton = document.getElementById(item.Id);
     console.log(item.Id);
     deleteButton.addEventListener("click", () => {
-      const cartItem = item;
-      removeItem(cartItem);
+      console.log(item.index);
+      //const cartItem = item;
+      //removeItem(cartItem);
     });
     //   cartItems.forEach((item) => {
     //     const deleteButton = document.querySelector(`#${item.Id}`);
@@ -81,11 +99,24 @@ function setListeners() {
 
 function removeItem(item) {
   const cartItems = getLocalStorage("so-cart");
-  const deleteItem = cartItems.findIndex(function (object) {
-    return object.Id === item.Id;
-  });
+  // const deleteItem = cartItems.findIndex(function (object) {
+  //   return object.Id === item.Id;
+  // });
 
-  cartItems.splice(deleteItem, 1);
+  const idToRemove = item.Id;
+
+  console.log(idToRemove);
+
+  const index = cartItems.findIndex(item => item.Id === idToRemove);
+
+  
+  console.log(index);
+
+  if (index > -1) {
+    cartItems.splice(index, 1);
+}
+
+  //cartItems.splice(deleteItem, 1);
   setLocalStorage("so-cart", cartItems);
   renderCartContents();
 }
@@ -93,7 +124,7 @@ function removeItem(item) {
 function cartItemTemplate(item) {
   console.log(item.quantity);
   return `<li class="cart-card divider">
-<snan id="${item.Id}">X</snan>
+<button class="remove" id="${item.Id}">X</button>
   <a href="#" class="cart-card__image">
     <img
       src="${item.Image}"
@@ -112,5 +143,42 @@ function cartItemTemplate(item) {
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  let removeButtons = document.querySelectorAll(".remove");
+  removeButtons.forEach((button, index) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      console.log(`Removing item at index ${index}`);
+      // Your code here
+      remoove(index);
+    });
+  });
+});
+
+function remoove(index){
+  const cartItems = getLocalStorage("so-cart");
+  if (index > -1) {
+    cartItems.splice(index, 1);
+  }
+  setLocalStorage("so-cart", cartItems);
+
+  // Call renderCartContents() after removing an item from the cart
+  renderCartContents();
+
+  // Re-select all buttons with class 'remove'
+  let removeButtons = document.querySelectorAll(".remove");
+  removeButtons.forEach((button, index) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      console.log(`Removing item at index ${index}`);
+      // Your code here
+      remoove(index);
+    });
+  });
+}
+
+
+
 
 renderCartContents();
