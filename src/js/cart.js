@@ -122,6 +122,7 @@ function cartItemTemplate(item) {
   console.log(item.quantity);
   return `<li class="cart-card divider">
 <button class="remove" id="${item.Id}">X</button>
+<button class="add" id="${item.Id}">+</button>
   <a href="#" class="cart-card__image">
     <img
       src="${item.Image}"
@@ -157,6 +158,28 @@ document.addEventListener("click", (e) => {
       if (list.length == 0) {
         totalSel.classList.add("hide");
       }
+      renderCartContents();
+    }
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("add")) {
+    e.preventDefault();
+    let object = e.target.getAttribute("id");
+    console.log(`Removing item with id ${object}`);
+
+    let list = getLocalStorage("so-cart");
+
+    let indexToAdd = list.findIndex((item) => item.Id === object);
+
+    let itemToAdd = list[indexToAdd];
+
+    if (indexToAdd > -1) {
+      console.log(itemToAdd);
+      let newList = list.concat(itemToAdd);
+      setLocalStorage("so-cart", newList);
+      products = [];
       renderCartContents();
     }
   }
