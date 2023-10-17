@@ -22,13 +22,8 @@ function renderCartContents() {
     // })
     //products = cartItems;
 
-
-
-
-
-
     cartItems.forEach((item) => {
-      if (item.quantity == 0){
+      if (item.quantity == 0) {
         console.log("gogone");
       }
       let existingItem = products.find((product) => product.Id === item.Id);
@@ -39,10 +34,6 @@ function renderCartContents() {
         products.push(item);
       }
     });
-
-
-
-
 
     console.log(cartItems);
     console.log(products);
@@ -77,8 +68,8 @@ function setListeners() {
   let index = -1;
   const cartItems = getLocalStorage("so-cart");
   cartItems.forEach((item) => {
-    index += 1
-    item.index = index
+    index += 1;
+    item.index = index;
     //console.log(item.index)
     const deleteButton = document.getElementById(item.Id);
     console.log(item.Id);
@@ -107,14 +98,13 @@ function removeItem(item) {
 
   console.log(idToRemove);
 
-  const index = cartItems.findIndex(item => item.Id === idToRemove);
+  const index = cartItems.findIndex((item) => item.Id === idToRemove);
 
-  
   console.log(index);
 
   if (index > -1) {
     cartItems.splice(index, 1);
-}
+  }
 
   //cartItems.splice(deleteItem, 1);
   setLocalStorage("so-cart", cartItems);
@@ -156,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-function remoove(index){
+function remoove(index) {
   const cartItems = getLocalStorage("so-cart");
   if (index > -1) {
     cartItems.splice(index, 1);
@@ -177,8 +167,5 @@ function remoove(index){
     });
   });
 }
-
-
-
 
 renderCartContents();

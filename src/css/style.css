@@ -111,6 +111,11 @@ button {
   cursor: pointer;
 }
 
+/* Breadcrumb Styling*/
+#breadcrumb {
+  padding: 8px;
+}
+
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
