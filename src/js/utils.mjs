@@ -28,7 +28,12 @@ export function setClick(selector, callback) {
 
 export function getCartAmount(){
   const cart = getLocalStorage("so-cart");
-  return cart.length;
+  if (cart != null){
+  
+    return cart.length;
+  }
+  
+  return 0;
 }
 
 export function renderHeaderFooter(){

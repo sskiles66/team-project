@@ -28,7 +28,7 @@ function renderCartContents() {
       }
       let existingItem = products.find((product) => product.Id === item.Id);
       if (existingItem) {
-        existingItem.quantity = cartItems.length;
+        existingItem.quantity += 1;
       } else {
         item.quantity = 1;
         products.push(item);
@@ -38,9 +38,15 @@ function renderCartContents() {
     console.log(cartItems);
     console.log(products);
 
-    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    const htmlItems = products.map((item) => cartItemTemplate(item));
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
-    totalSel.classList.remove("hide");
+
+    if (cartItems.length != 0) {
+      totalSel.classList.remove("hide");
+    }
+
+    //totalSel.classList.remove("hide");
+
     const total = getTotalCost();
     document.querySelector("#total-amount").innerHTML = "$" + total;
     //setListeners();
@@ -64,52 +70,53 @@ function getTotalCost() {
   return total;
 }
 
-function setListeners() {
-  let index = -1;
-  const cartItems = getLocalStorage("so-cart");
-  cartItems.forEach((item) => {
-    index += 1;
-    item.index = index;
-    //console.log(item.index)
-    const deleteButton = document.getElementById(item.Id);
-    console.log(item.Id);
-    deleteButton.addEventListener("click", () => {
-      console.log(item.index);
-      //const cartItem = item;
-      //removeItem(cartItem);
-    });
-    //   cartItems.forEach((item) => {
-    //     const deleteButton = document.querySelector(`#${item.Id}`);
-    //     deleteButton.addEventListener('click', () => {
-    //       const cartItem = item;
-    //       removeItem(cartItem);
-    //     })
-    //   })
-  });
-}
+// Brock's Work
+// function setListeners() {
+//   let index = -1;
+//   const cartItems = getLocalStorage("so-cart");
+//   cartItems.forEach((item) => {
+//     index += 1;
+//     item.index = index;
+//     //console.log(item.index)
+//     const deleteButton = document.getElementById(item.Id);
+//     console.log(item.Id);
+//     deleteButton.addEventListener("click", () => {
+//       console.log(item.index);
+//       //const cartItem = item;
+//       //removeItem(cartItem);
+//     });
+//     //   cartItems.forEach((item) => {
+//     //     const deleteButton = document.querySelector(`#${item.Id}`);
+//     //     deleteButton.addEventListener('click', () => {
+//     //       const cartItem = item;
+//     //       removeItem(cartItem);
+//     //     })
+//     //   })
+//   });
+// }
+//Brock's Work
+// function removeItem(item) {
+//   const cartItems = getLocalStorage("so-cart");
+//   // const deleteItem = cartItems.findIndex(function (object) {
+//   //   return object.Id === item.Id;
+//   // });
 
-function removeItem(item) {
-  const cartItems = getLocalStorage("so-cart");
-  // const deleteItem = cartItems.findIndex(function (object) {
-  //   return object.Id === item.Id;
-  // });
+//   const idToRemove = item.Id;
 
-  const idToRemove = item.Id;
+//   console.log(idToRemove);
 
-  console.log(idToRemove);
+//   const index = cartItems.findIndex((item) => item.Id === idToRemove);
 
-  const index = cartItems.findIndex((item) => item.Id === idToRemove);
+//   console.log(index);
 
-  console.log(index);
+//   if (index > -1) {
+//     cartItems.splice(index, 1);
+//   }
 
-  if (index > -1) {
-    cartItems.splice(index, 1);
-  }
-
-  //cartItems.splice(deleteItem, 1);
-  setLocalStorage("so-cart", cartItems);
-  renderCartContents();
-}
+//   //cartItems.splice(deleteItem, 1);
+//   setLocalStorage("so-cart", cartItems);
+//   renderCartContents();
+// }
 
 function cartItemTemplate(item) {
   console.log(item.quantity);
@@ -134,38 +141,25 @@ function cartItemTemplate(item) {
 </li>`;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  let removeButtons = document.querySelectorAll(".remove");
-  removeButtons.forEach((button, index) => {
-    button.addEventListener("click", (e) => {
-      e.preventDefault();
-      console.log(`Removing item at index ${index}`);
-      // Your code here
-      remoove(index);
-    });
-  });
-});
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("remove")) {
+    e.preventDefault();
+    let buttonId = e.target.getAttribute("id");
+    console.log(`Removing item with id ${buttonId}`);
 
-function remoove(index) {
-  const cartItems = getLocalStorage("so-cart");
-  if (index > -1) {
-    cartItems.splice(index, 1);
+    let list = getLocalStorage("so-cart");
+    let indexToRemove = list.findIndex((item) => item.Id === buttonId);
+    if (indexToRemove !== -1) {
+      list.splice(indexToRemove, 1);
+      setLocalStorage("so-cart", list);
+      cartCount.set(list.length);
+      products = [];
+      if (list.length == 0) {
+        totalSel.classList.add("hide");
+      }
+      renderCartContents();
+    }
   }
-  setLocalStorage("so-cart", cartItems);
-
-  // Call renderCartContents() after removing an item from the cart
-  renderCartContents();
-
-  // Re-select all buttons with class 'remove'
-  let removeButtons = document.querySelectorAll(".remove");
-  removeButtons.forEach((button, index) => {
-    button.addEventListener("click", (e) => {
-      e.preventDefault();
-      console.log(`Removing item at index ${index}`);
-      // Your code here
-      remoove(index);
-    });
-  });
-}
+});
 
 renderCartContents();
