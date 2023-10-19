@@ -9,25 +9,22 @@
   let promise = getData(category);
   //console.log(promise.data)
 
-  const validIds = ["880RR", "985RF", "985PR", "344YJ"];
 
-  let filteredPromise = promise.then(data => {
-    return data.filter(product => validIds.includes(product.Id));
-  });
+
 </script>
 
 <p>Top products: {category}</p>
 
-{#await filteredPromise}
+{#await promise}
   <p>...waiting</p>
 {:then data}
   <ul class="product-list">
 
     {#each data as product}
       <li class="product-card">
-        <a href="product_pages/index.html?product={product.Id}">
+        <a href="/product_pages/index.html?product={product.Id}">
           <img
-            src={product.Image}
+            src={product.Images.PrimaryMedium}
             alt={product.Name}
           />
           <h3 class="card__brand">{product.Brand.Name}</h3>
