@@ -95,7 +95,21 @@
           </li>
         -->
       </section>
+      <form id="news-form">
+        <h1 id="form-header">Sign up for our newsletter!</h1>
+        <fieldset id="sign-up-form">
+            <label class="top"> First Name: <input type="text" name="fname" required></label>
+            <label class="top"> Last Name: <input type="text" name="lname" required></label>
+            <label class="top"> Phone: <input type="tel" name="phone" placeholer="1235551234"></label>
+            <label class="top"> Email: <input type="email" name="email" placeholer="someone@gmail.com" required></label>
+        </fieldset>
+    <input id="submit-button" type="submit" value="Submit">
+    </form>
+    <div id="thankYouMessage" style="display: none;">
+      <h2 style="text-align: center;">Thank you for submitting the form!</h2>
+  </div>
     </main>
     <footer id="main-footer"></footer>
+    <script src="js/form.js"></script>
   </body>
 </html>

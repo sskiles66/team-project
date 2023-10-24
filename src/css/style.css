@@ -263,6 +263,29 @@ button {
   }
 }
 
+form{
+  /* grid-column: 0/1; */
+  height: 100%;
+  display: block;
+  margin-top: 5rem;
+  text-align: center;
+}
+
+label{
+  margin-left: 0.5rem;
+}
+
+fieldset{
+  margin-bottom: 1rem;
+  margin-left: 26.5rem;
+}
+
+#sign-up-form{
+  text-align: left;
+  display: block;
+  width: 15rem;
+}
+
 footer {
   font-size: var(--small-font);
   padding: 1em;
