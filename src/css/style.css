@@ -263,7 +263,7 @@ button {
   }
 }
 
-form{
+form {
   /* grid-column: 0/1; */
   height: 100%;
   display: block;
@@ -271,16 +271,16 @@ form{
   text-align: center;
 }
 
-label{
+label {
   margin-left: 0.5rem;
 }
 
-fieldset{
+fieldset {
   margin-bottom: 1rem;
   margin-left: 26.5rem;
 }
 
-#sign-up-form{
+#sign-up-form {
   text-align: left;
   display: block;
   width: 15rem;
