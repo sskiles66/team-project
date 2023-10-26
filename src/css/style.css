@@ -187,6 +187,18 @@ button {
   font-size: 1em;
 }
 
+#search {
+  display: flex;
+  justify-content: center;
+}
+
+#search input {
+  width: 800px;
+}
+#searchButton {
+  margin: 0;
+}
+
 /* End product list card */
 
 .product-detail {
