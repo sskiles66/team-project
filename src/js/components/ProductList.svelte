@@ -20,6 +20,18 @@
   console.log(filteredData);
 });
 
+  function openModal(product){
+    console.log(product);
+    document.querySelector("#modal").style.display = "block";
+    document.querySelector("#modal-text").innerHTML = product.DescriptionHtmlSimple;
+    document.querySelector("#modal-img").src =product.Images.PrimaryLarge;
+    
+  }
+
+  function closeModal(){
+    document.querySelector("#modal").style.display = "none";
+  }
+
 </script>
 
 <p>Top products: {category}</p>
@@ -42,10 +54,19 @@
           <h2 class="card__name">{product.Name}</h2>
           <s class="product-card__price">{product.ListPrice}</s>
           <DiscountedPrice finalPrice={product.FinalPrice}/>
+          
         </a>
+        <button on:click={() => openModal(product)} id="modal-view">Quick View</button>
       </li>
     {/each}
   </ul>
+  <div id="modal">
+    <div id="modal-content">
+      <button on:click={closeModal} class="close">&times;</button>
+      <p id="modal-text">test for now</p>
+      <img id="modal-img" src="#" alt="">
+    </div>
+  </div>
   {:else}
   <p style="color: red">Sorry, there are no items with {value}. Try resetting the value in the search bar</p>
   {/if}
