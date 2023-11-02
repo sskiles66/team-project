@@ -116,6 +116,30 @@ button {
   padding: 8px;
 }
 
+#banner-btn{
+  top: .5rem;
+  right: 1rem;
+  position:relative;
+  background-color: white;
+}
+
+#button-holder{
+    top: .5rem;
+    margin-left: 85%;
+    position:relative;
+    background-color: white;
+}
+
+#banner{
+  text-align: center;
+  margin: 1rem;
+  border: 1px solid black;
+}
+
+.banner-text{
+  padding-bottom: 2rem;
+}
+
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
@@ -138,6 +162,10 @@ button {
 }
 
 /* End cart icon styles */
+
+.close{
+  display: none;
+}
 
 .mission {
   padding: 0 0.5em;
