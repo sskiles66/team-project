@@ -1,5 +1,6 @@
 import MainHeader from "./components/MainHeader.svelte";
 import MainFooter from "./components/MainFooter.svelte";
+import AlertMessage from "./components/AlertMessage.svelte";
 
 
 // wrapper for querySelector...returns matching element
@@ -63,4 +64,15 @@ export function formDataToJSON(formElement) {
   });
 
   return convertedJSON;
+}
+
+export function alertMessage(message, scroll=true, duration = 3000){
+  const alert = new AlertMessage({
+    target: document.querySelector("#target"),
+    props: {message: message}
+});
+
+  setTimeout(function () {
+      alert.$destroy();
+    }, duration);
 }
