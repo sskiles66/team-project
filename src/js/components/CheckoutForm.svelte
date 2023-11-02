@@ -4,6 +4,7 @@
     import {getLocalStorage, formDataToJSON} from "../utils.mjs";
     import {calculateDiscount} from "../calculateDiscount.mjs";
     import {checkout} from "../externalServices.mjs";
+    import { alertMessage } from "../utils.mjs";
     let length = getLocalStorage("so-cart").length;
     console.log(length);
     let subtotal = getSubTotalCost();
@@ -56,6 +57,7 @@
     // remember that the form that was submitted can be found two ways...this or e.target 
     // call the checkout method in our externalServices module and send it our data object.
 
+    
         const json = formDataToJSON(this);
         json.orderDate = new Date();
         json.orderTotal = orderTotal;
@@ -67,9 +69,14 @@
 
         try {
             const res = await checkout(json);
+            if(res.ok){
+                alertMessage("Order was successfully submitted!");
+                window.location.href = "success.html";
+
+            }
             console.log(res);
             } catch (err) {
-            console.log(err);
+            alertMessage(err);
             
   };
     }
