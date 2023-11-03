@@ -116,27 +116,27 @@ button {
   padding: 8px;
 }
 
-#banner-btn{
-  top: .5rem;
+#banner-btn {
+  top: 0.5rem;
   right: 1rem;
-  position:relative;
+  position: relative;
   background-color: white;
 }
 
-#button-holder{
-    top: .5rem;
-    margin-left: 85%;
-    position:relative;
-    background-color: white;
+#button-holder {
+  top: 0.5rem;
+  margin-left: 85%;
+  position: relative;
+  background-color: white;
 }
 
-#banner{
+#banner {
   text-align: center;
   margin: 1rem;
   border: 1px solid black;
 }
 
-.banner-text{
+.banner-text {
   padding-bottom: 2rem;
 }
 
@@ -163,7 +163,7 @@ button {
 
 /* End cart icon styles */
 
-.close{
+.close {
   display: none;
 }
 
