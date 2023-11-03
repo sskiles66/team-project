@@ -63,54 +63,6 @@ function getTotalCost() {
   return total;
 }
 
-// Brock's Work
-// function setListeners() {
-//   let index = -1;
-//   const cartItems = getLocalStorage("so-cart");
-//   cartItems.forEach((item) => {
-//     index += 1;
-//     item.index = index;
-//     //console.log(item.index)
-//     const deleteButton = document.getElementById(item.Id);
-//     console.log(item.Id);
-//     deleteButton.addEventListener("click", () => {
-//       console.log(item.index);
-//       //const cartItem = item;
-//       //removeItem(cartItem);
-//     });
-//     //   cartItems.forEach((item) => {
-//     //     const deleteButton = document.querySelector(`#${item.Id}`);
-//     //     deleteButton.addEventListener('click', () => {
-//     //       const cartItem = item;
-//     //       removeItem(cartItem);
-//     //     })
-//     //   })
-//   });
-// }
-//Brock's Work
-// function removeItem(item) {
-//   const cartItems = getLocalStorage("so-cart");
-//   // const deleteItem = cartItems.findIndex(function (object) {
-//   //   return object.Id === item.Id;
-//   // });
-
-//   const idToRemove = item.Id;
-
-//   console.log(idToRemove);
-
-//   const index = cartItems.findIndex((item) => item.Id === idToRemove);
-
-//   console.log(index);
-
-//   if (index > -1) {
-//     cartItems.splice(index, 1);
-//   }
-
-//   //cartItems.splice(deleteItem, 1);
-//   setLocalStorage("so-cart", cartItems);
-//   renderCartContents();
-// }
-
 /**
  * Create Cart Item Template
  *
