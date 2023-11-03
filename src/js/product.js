@@ -1,10 +1,7 @@
-import { getParam } from "./utils.mjs";
-import { renderHeaderFooter } from "./utils.mjs";
-
+import {getParam, renderHeaderFooter} from "./utils.mjs";
 import productDetails from "./productDetails.mjs";
-
-renderHeaderFooter();
 
 const productId = getParam("product");
 
+renderHeaderFooter();
 productDetails(productId, ".product-detail");
