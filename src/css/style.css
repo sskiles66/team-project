@@ -286,6 +286,20 @@ button {
   width: 100%;
 }
 
+#flag-cont {
+  margin-left: 80%;
+}
+
+#discount-flag {
+  text-align: center;
+  width: 100px;
+  background-color: green;
+  color: white;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;

@@ -1,6 +1,6 @@
 import {getLocalStorage, setLocalStorage} from "./utils.mjs";
 import {findProductById} from "./externalServices.mjs";
-import {calculateDiscount} from "./calculateDiscount.mjs";
+import {calculateDiscount, discountPercentage } from "./calculateDiscount.mjs";
 import { cartCount } from "./stores.mjs";
 
 let product = {};
@@ -8,6 +8,9 @@ let product = {};
 function productDetailsTemplate(product) {
   return `<h3>${product.Brand.Name}</h3>
     <h2 class="divider">${product.NameWithoutBrand}</h2>
+    <div id="flag-cont">
+      <p id="discount-flag">${discountPercentage}% off</p>
+    </div>
     <img
       class="divider"
       src="${product.Images.PrimaryLarge}"
