@@ -1,8 +1,8 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
-import { findProductById } from "./externalServices.mjs";
-import { calculateDiscount } from "./calculateDiscount.mjs";
-import { renderHeaderFooter } from "./utils.mjs";
-import { cartCount } from "./stores.mjs";
+import {getLocalStorage, setLocalStorage} from "./utils.mjs";
+import {findProductById} from "./externalServices.mjs";
+import {calculateDiscount} from "./calculateDiscount.mjs";
+import {renderHeaderFooter} from "./utils.mjs";
+import {cartCount} from "./stores.mjs";
 
 const totalSel = document.querySelector("#total");
 
@@ -111,14 +111,30 @@ function getTotalCost() {
 //   renderCartContents();
 // }
 
+/**
+ * Create Cart Item Template
+ *
+ * @param {Object} item
+ * @param {string} item.Id
+ * @param {string} item.Name
+ * @param {string} item.Images.PrimaryLarge
+ * @param {Array} item.Colors
+ * @param {string} item.Colors.ColorName
+ * @param {number} item.FinalPrice
+ * @param {number} item.quantity
+ *
+ * @returns {string}
+ *
+ * This is JSDoc if anyone cares. ask abe about it if you care enough :)
+ */
+
 function cartItemTemplate(item) {
-  console.log(item.quantity);
   return `<li class="cart-card divider">
 <button class="remove" id="${item.Id}">X</button>
 <button class="add" id="${item.Id}">+</button>
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimaryLarge}"
       alt="${item.Name}"
     />
   </a>
