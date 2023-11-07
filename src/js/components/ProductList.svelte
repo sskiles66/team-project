@@ -8,12 +8,14 @@
 
   let promise = getProductsByCategory(category);
   let value = localStorage.getItem("searchValue");
+  const minInput = document.querySelector("#min");
+  const maxInput = document.querySelector("#max");
   let min = getLocalStorage("min");
   let max = getLocalStorage("max");
+  if (min == null || max == null){
+    minInput.value = 0;
+    maxInput.value = 200;
 
-  if (min == null || max == null) {
-    min.value = 0;
-    max.value = 200;
     setLocalStorage("min", 0);
     setLocalStorage("max", 200);
   }
