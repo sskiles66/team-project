@@ -3,8 +3,8 @@ import {
   setLocalStorage,
   renderHeaderFooter,
 } from "./utils.mjs";
-import {calculateDiscount} from "./calculateDiscount.mjs";
-import {cartCount} from "./stores.mjs";
+import { calculateDiscount } from "./calculateDiscount.mjs";
+import { cartCount } from "./stores.mjs";
 
 /**
  * @type {Element}
@@ -37,7 +37,11 @@ function renderCartContents() {
   cartCount.set(cartItems.length);
 
   cartItems.forEach((item) => {
-    let existingItem = products.find((product) => product.Id === item.Id);
+    console.log(item);
+    let existingItem = products.find(
+      (product) =>
+        product.Id === item.Id && product.colorIndex == item.colorIndex
+    );
     if (existingItem) {
       existingItem.quantity += 1;
     } else {
@@ -95,18 +99,22 @@ function getTotalCost() {
  */
 function cartItemTemplate(item) {
   return `<li class="cart-card divider">
-<button class="remove" id="${item.Id}">X</button>
-<button class="add" id="${item.Id}">+</button>
+<button class="remove" id="${item.Id}" data-color-index="${
+    item.colorIndex
+  }">X</button>
+<button class="add" id="${item.Id}" data-color-index="${
+    item.colorIndex
+  }">+</button>
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Images.PrimaryLarge}"
+      src="${item.Colors[item.colorIndex].ColorPreviewImageSrc}"
       alt="${item.Name}"
     />
   </a>
   <a href="#">
     <h2 class="card__name">${item.Name}</h2>
   </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+  <p class="cart-card__color">${item.Colors[item.colorIndex].ColorName}</p>
   <div>
     <s class="cart-card__price">$${item.FinalPrice}</s>
     <p>$${calculateDiscount(item.FinalPrice)}</p>
@@ -126,8 +134,11 @@ function handleRemoveClick(e) {
   if (e.target.classList.contains("remove")) {
     e.preventDefault();
     let buttonId = e.target.getAttribute("id");
+    let colorIndex = e.target.getAttribute("data-color-index");
     let list = getLocalStorage("so-cart");
-    let indexToRemove = list.findIndex((item) => item.Id === buttonId);
+    let indexToRemove = list.findIndex(
+      (item) => item.Id === buttonId && item.colorIndex == colorIndex
+    );
     if (indexToRemove !== -1) {
       list.splice(indexToRemove, 1);
       setLocalStorage("so-cart", list);
@@ -150,9 +161,12 @@ function handleRemoveClick(e) {
 function handleAddClick(e) {
   if (e.target.classList.contains("add")) {
     e.preventDefault();
-    let object = e.target.getAttribute("id");
+    let buttonId = e.target.getAttribute("id");
+    let colorIndex = e.target.getAttribute("data-color-index");
     let list = getLocalStorage("so-cart");
-    let indexToAdd = list.findIndex((item) => item.Id === object);
+    let indexToAdd = list.findIndex(
+      (item) => item.Id === buttonId && item.colorIndex == colorIndex
+    );
     let itemToAdd = list[indexToAdd];
 
     if (indexToAdd > -1) {
@@ -170,6 +184,8 @@ function handleAddClick(e) {
 function handleCheckoutClick() {
   location.href = "../checkout/index.html";
 }
+
+function getColorIndex() {}
 
 // Add event listeners
 document.addEventListener("click", handleRemoveClick);

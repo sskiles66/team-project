@@ -300,6 +300,18 @@ button {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
 }
 
+#productColors {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.colors {
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+}
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;

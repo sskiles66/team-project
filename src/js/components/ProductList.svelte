@@ -13,14 +13,20 @@
 
   let value = localStorage.getItem("searchValue")
 
+  const minInput = document.querySelector("#min");
+  const maxInput = document.querySelector("#max");
+
   let min = getLocalStorage("min");
   let max = getLocalStorage("max");
 
   if (min == null || max == null){
-    min.value = 0;
-    max.value = 200;
+    minInput.value = 0;
+    maxInput.value = 200;
     setLocalStorage("min", 0);
     setLocalStorage("max", 200);
+    
+    min = getLocalStorage("min");
+    max = getLocalStorage("max");
   }
 
   console.log(min);
@@ -70,19 +76,19 @@
   {#if data.length != 0}
   <ul class="product-list">
 
-    {#each data as product}
+    {#each data as product}    
       <li class="product-card">
-        <a href="/product_pages/index.html?product={product.Id}">
+        <a href="/product_pages/index.html?product={product.Id}">          
           <img
             src={product.Images.PrimaryMedium}
             alt={product.Name}
-          />
+          /> 
           <h3 class="card__brand">{product.Brand.Name}</h3>
           <h2 class="card__name">{product.Name}</h2>
           <s class="product-card__price">{product.ListPrice}</s>
           <DiscountedPrice finalPrice={product.FinalPrice}/>
           
-        </a>
+        </a>        
         <button on:click={() => openModal(product)} id="modal-view">Quick View</button>
       </li>
     {/each}
