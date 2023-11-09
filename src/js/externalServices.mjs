@@ -36,3 +36,18 @@ export async function checkout(order){
 
   return await fetch(baseURL + "checkout/", options);
 }
+
+
+export async function loginRequest(user) {
+  console.log("beofre");
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  };
+  console.log("after");
+  const response = await fetch(baseURL + "login", options).then(convertToJson);
+  return response.accessToken;
+}
